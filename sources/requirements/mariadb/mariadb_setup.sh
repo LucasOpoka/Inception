@@ -10,6 +10,8 @@ GRANT ALL PRIVILEGES ON $MDB_NAME.* TO 'root'@'%' IDENTIFIED BY '$MDB_ROOT_PWD';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MDB_ROOT_PWD');
 EOF
 
+sleep 5
+
 service mariadb stop
 
 exec $@
