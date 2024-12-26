@@ -12,6 +12,8 @@ RUN wget https://github.com/wp-cli/wp-cli-bundle/releases/download/v2.7.0/wp-cli
 RUN chmod +x wp-cli-2.7.0.phar
 RUN mv wp-cli-2.7.0.phar /usr/local/bin/wp
 
+RUN mkdir -p /var/www/wp
+RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
 CMD ["wordpress_setup.sh"]
 

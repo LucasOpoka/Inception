@@ -25,6 +25,8 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
                         $WP_USER $WP_USER_MAIL \
                         --user_pass=$WP_USER_PWD
 
+    chown -R www-data:www-data /var/www/wp
+
 fi
 
 mkdir -p /run/php/

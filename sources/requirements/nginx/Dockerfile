@@ -12,6 +12,8 @@ RUN openssl req -x509 -nodes \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
+RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
+
 CMD ["nginx"]
 
 EXPOSE 443
