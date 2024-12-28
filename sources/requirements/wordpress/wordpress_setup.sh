@@ -4,7 +4,7 @@ cd /var/www/wp
 
 if [ ! -f /var/www/wp/wp-config.php ]; then
 
-    mariadb-admin ping --protocol=tcp --host=mariadb -u "$MDB_USER" --password="$MDB_USER_PWD" --wait >/dev/null 2>/dev/null
+    mariadb-admin ping --protocol=tcp --host=mariadb -u $MDB_USER --password=$MDB_USER_PWD --wait >/dev/null 2>/dev/null
 
     wp core download	 --allow-root
 
@@ -15,6 +15,7 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
                         --dbhost=mariadb:3306
 
     wp core install     --allow-root \
+                        --skip-email \
                         --url=$WP_URL \
                         --title=$WP_TITLE \
                         --admin_user=$WP_ADMIN \
