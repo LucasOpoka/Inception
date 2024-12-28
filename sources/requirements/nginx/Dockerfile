@@ -1,19 +1,17 @@
-FROM debian:bullseye
+FROM alpine:3.19.2
 
-RUN apt update -y && apt upgrade -y \
-    && apt install -y gettext nginx openssl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add bash nginx openssl
 
 RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes \
-    -out /etc/nginx/ssl/nginx_crt.crt \
-    -keyout /etc/nginx/ssl/nginx_key.key \
+    -out /etc/nginx/ssl/certificate.crt \
+    -keyout /etc/nginx/ssl/certificate.key \
     -subj "/C=FI/ST=UUSIMA/L=HELSINKI/O=HIVE/OU=HIVE/CN=lopoka.42.fr"
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
 
 EXPOSE 443
