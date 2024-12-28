@@ -1,13 +1,14 @@
 #!/bin/bash
 
+cd /var/www/wp
+
 if [ ! -f /var/www/wp/wp-config.php ]; then
 
-    mariadb-admin ping --protocol=tcp --host=mariadb -u $MDB_USER --password $MDB_USER_PWD --wait
+    mariadb-admin ping --protocol=tcp --host=mariadb -u "$MDB_USER" --password="$MDB_USER_PWD" --wait >/dev/null 2>/dev/null
 
-    wp core download --path=/var/www/wp/ --allow-root
+    wp core download	 --allow-root
 
     wp config create    --allow-root \
-                        --path=/var/www/wp/ \
                         --dbname=$MDB_NAME \
                         --dbuser=$MDB_USER \
                         --dbpass=$MDB_USER_PWD \
@@ -16,14 +17,13 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
     wp core install     --allow-root \
                         --url=$WP_URL \
                         --title=$WP_TITLE \
-                        --path=/var/www/wp/ \
                         --admin_user=$WP_ADMIN \
                         --admin_email=$WP_ADMIN_MAIL \
                         --admin_password=$WP_ADMIN_PWD
                         
 
     wp user create      --allow-root \
-                        --path=/var/www/wp/ \
+			--path=/var/www/wp \
                         $WP_USER $WP_USER_MAIL \
                         --user_pass=$WP_USER_PWD
 
@@ -31,6 +31,4 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
 
 fi
 
-mkdir -p /run/php/
-
-php-fpm7.4 -F
+php-fpm82 -F

@@ -1,16 +1,14 @@
-FROM debian:bullseye
+FROM alpine:3.19.2
 
-RUN apt update -y && apt upgrade -y \
-    && apt install -y php7.4-fpm php7.4-mysql wget mariadb-client \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add bash wget php82 php82-fpm php82-phar php82-curl php82-cgi php82-mysqli php82-iconv mariadb-client
 
-COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY www.conf /etc/php82/php-fpm.d/www.conf
 COPY wordpress_setup.sh /bin/wordpress_setup.sh
 RUN chmod +x /bin/wordpress_setup.sh
 
-RUN wget https://github.com/wp-cli/wp-cli-bundle/releases/download/v2.7.0/wp-cli-2.7.0.phar
-RUN chmod +x wp-cli-2.7.0.phar
-RUN mv wp-cli-2.7.0.phar /usr/local/bin/wp
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /var/www/wp
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
