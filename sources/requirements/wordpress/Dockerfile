@@ -1,8 +1,8 @@
-FROM alpine:3.19.2
+FROM alpine:3.20.3
 
-RUN apk update && apk add bash wget php82 php82-fpm php82-phar php82-curl php82-cgi php82-mysqli php82-iconv mariadb-client
+RUN apk update && apk add bash wget php83 php83-fpm php83-phar php83-curl php83-cgi php83-mysqli php83-iconv mariadb-client
 
-COPY www.conf /etc/php82/php-fpm.d/www.conf
+COPY www.conf /etc/php83/php-fpm.d/www.conf
 COPY wordpress_setup.sh /bin/wordpress_setup.sh
 RUN chmod +x /bin/wordpress_setup.sh
 

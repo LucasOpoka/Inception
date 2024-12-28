@@ -32,4 +32,4 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
 
 fi
 
-php-fpm82 -F
+php-fpm83 -F
