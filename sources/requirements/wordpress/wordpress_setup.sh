@@ -6,7 +6,8 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
 
     mariadb-admin ping --protocol=tcp --host=mariadb -u $MDB_USER --password=$MDB_USER_PWD --wait >/dev/null 2>/dev/null
 
-    wp core download	 --allow-root
+    wp core download    --allow-root \
+                        --version='latest'
 
     wp config create    --allow-root \
                         --dbname=$MDB_NAME \
