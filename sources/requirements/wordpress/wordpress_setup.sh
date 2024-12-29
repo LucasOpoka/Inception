@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd /var/www/wp
 
@@ -28,9 +28,8 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
                         --path=/var/www/wp \
                         $WP_USER $WP_USER_MAIL \
                         --user_pass=$WP_USER_PWD
-
-    chown -R www-data:www-data /var/www/wp
-
 fi
+
+chown -R www-data:www-data /var/www/wp
 
 php-fpm83 -F
