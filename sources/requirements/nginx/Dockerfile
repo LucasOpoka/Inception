@@ -1,6 +1,6 @@
 FROM alpine:3.20.3
 
-RUN apk update && apk add bash nginx openssl
+RUN apk update && apk add nginx openssl
 
 RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes \

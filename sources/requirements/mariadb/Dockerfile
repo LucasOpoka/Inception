@@ -1,12 +1,13 @@
-FROM debian:bullseye
+FROM alpine:3.20.3
 
-RUN apt update -y && apt upgrade -y && apt install mariadb-server -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add mariadb mariadb-client
 
-COPY 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+RUN chmod 644 /etc/my.cnf.d/mariadb-server.cnf
+
 COPY mariadb_setup.sh /bin/mariadb_setup.sh
 RUN chmod +x /bin/mariadb_setup.sh
 
-CMD ["mariadb_setup.sh", "mysqld_safe"]
+CMD ["mariadb_setup.sh"]
 
 EXPOSE 3306
