@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd /var/www/wp
 
@@ -25,7 +25,7 @@ if [ ! -f /var/www/wp/wp-config.php ]; then
                         
 
     wp user create      --allow-root \
-			--path=/var/www/wp \
+                        --path=/var/www/wp \
                         $WP_USER $WP_USER_MAIL \
                         --user_pass=$WP_USER_PWD
 
